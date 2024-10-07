@@ -1,0 +1,28 @@
+{% extends '_model.html' %}
+
+{% block content %}
+<h3>Nova tarefa</h3>
+
+<form action="/new" method="post">
+
+    <div>
+        <label for="name">Nome da tarefa</label>
+        <input type="text" name="name" id="name" required minlength="3" placeholder="Nomeie sua nova tarefa">
+    </div>
+
+    <div>
+        <label for="descricao">Descrição da tarefa</label>
+        <input type="text" name="description" id="descricao" required minlength="10" placeholder="Descreva sua tarefa">
+    </div>
+
+    <div>
+    <label for="expire">Data de expiração <sup title="Selecione ou digite uma data no formato 'dd/mm/AAAA'; se quiser que a tarefa expire em 30 dias, não preencha nada.">(!)</sup></label>
+    <input type="datetime-local" name="expire" id="expire">
+    </div>
+
+    <div>
+        <button type="submit">Criar tarefa</button>
+    </div>
+</form>
+
+{% endblock %}
