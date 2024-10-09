@@ -18,6 +18,8 @@
         <td>
             {% if tarefa.status == 'pending' %}
             <button title="Marcar como concluída" onclick="location.href='/completed/{{ tarefa.id }}'">&#x2713;</button>
+            {% else %}
+            <button>&#10006;</button>
             {% endif %}
             <button title="Deletar" onclick="location.href='/del/{{ tarefa.id }}'">&#128465;</button>
             <tr>
@@ -33,6 +35,10 @@
 
 {% elif page.action == 'del' %}
 <p><strong>Tarefa apagada!</strong></p>
+
+{% elif page.action == 'pen' %}
+<p><strong>Tarefa pendente!</strong></p>
+
 {% endif %}
 <hr>
 <table>
