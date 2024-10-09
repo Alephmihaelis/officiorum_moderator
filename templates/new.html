@@ -1,28 +1,39 @@
 {% extends '_model.html' %}
 
 {% block content %}
-<h3>Nova tarefa</h3>
+<h3>Cadastrar nova tarefa</h3>
+
+<p>Preencha todos os campos para criar uma nova tarefa.</p>
 
 <form action="/new" method="post">
 
     <div>
-        <label for="name">Nome da tarefa</label>
+        <label for="name">Nome da tarefa: </label>
         <input type="text" name="name" id="name" required minlength="3" placeholder="Nomeie sua nova tarefa">
     </div>
 
     <div>
-        <label for="descricao">Descrição da tarefa</label>
+        <label for="descricao">Descrição da tarefa: </label>
         <input type="text" name="description" id="descricao" required minlength="10" placeholder="Descreva sua tarefa">
     </div>
 
     <div>
-    <label for="expire">Data de expiração <sup title="Selecione ou digite uma data no formato 'dd/mm/AAAA'; se quiser que a tarefa expire em 30 dias, não preencha nada.">(!)</sup></label>
-    <input type="datetime-local" name="expire" id="expire">
+    <label for="expire">Data de expiração: <sup title="Selecione ou digite uma data para a conclusão da tarefa, ou aceite a data sugerida.">(!)</sup></label>
+    <input type="datetime-local" name="expire" id="expire" required value="{{ page.date30 }}">
     </div>
 
     <div>
         <button type="submit">Criar tarefa</button>
     </div>
 </form>
+
+{% if page.created %}
+<p><strong>Tarefa criada com sucesso!</strong></p>
+{% endif %}
+
+<script>
+    // Evita o reenvio dos formulários ao atualizar a página
+if (window.history.replaceState) window.history.replaceState(null, null, window.location.href)
+</script>
 
 {% endblock %}

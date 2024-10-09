@@ -1,10 +1,54 @@
 {% extends '_model.html' %}
 
 {% block content %}
-<h2>Tarefas já cadastradas</h2>
-<ol>
-    <li>Tarefa 1</li>
-    <li>Tarefa 2</li>
-    <li>Tarefa 3</li>
-</ol>
+
+<h2>Lista de tarefas já cadastradas</h2>
+
+<table>
+    <h3>Tarefas pendentes</h3>
+    <tr>
+        <th>Nome</th>
+        <th>Expiração</th>
+        <th>Ações</th>
+    </tr>
+    {% for tarefa in page.tarefas %}
+    <tr>
+        <td>{{ tarefa.name }}</td>
+        <td>{{ tarefa.expire }}</td>
+        <td>
+            {% if tarefa.status == 'pending' %}
+            <button title="Marcar como concluída" onclick="location.href='/completed/{{ tarefa.id }}'">&#x2713;</button>
+            {% endif %}
+            <button title="Deletar" onclick="location.href='/del/{{ tarefa.id }}'">&#128465;</button>
+            <tr>
+            <td colspan="3">{{ tarefa.description }}</td>
+            </tr>
+            <tr><td colspan="3"></td></tr>
+    {% endfor %}
+    </tr>
+</table>
+
+{% if page.action == 'comp' %}
+<p><strong>Tarefa concluída!</strong></p>
+
+{% elif page.action == 'del' %}
+<p><strong>Tarefa apagada!</strong></p>
+{% endif %}
+<hr>
+<table>
+    <h3>Tarefas concluídas</h3>
+    <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Expiração</th>
+    </tr>
+    {% for task in page.tarefas_concluidas %}
+    <tr>
+        <td>{{ task.name }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.expire }}</td>
+        {% endfor %}
+    </tr>
+</table>
+
 {% endblock %}
