@@ -2,7 +2,6 @@
 from flask import Flask, redirect, render_template, request, url_for
 from flask_mysqldb import MySQL
 from datetime import datetime, timedelta
-import mysql.connector
 
 app = Flask(__name__)
 
